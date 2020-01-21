@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>3D测试版</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+<!-- <div id="videoPoint" class="tanchu_zsd">
+    <form name="pointform" action="">
+        <div class="tit">
+            <span id="span_name">知识点测试</span>
+        </div>
+        <div style="height: 370px; margin: 10px; overflow: auto" id="videoPointContent" class="nr"><div class="ctit">多选题：</div><div class="ccontent">关于股份支付所确认的费用取决于两个因素，下列说法中正确的有（　　）。<br>A、 授予日的公允价值 <br>B、 权益工具的数量 <br>C、 授予日的历史价值 <br>D、 权益工具的质量</div><div><input type="checkbox" id="useranswer" name="useranswer" value="A">A&nbsp;&nbsp;<input type="checkbox" id="useranswer" name="useranswer" value="B">B&nbsp;&nbsp;<input type="checkbox" id="useranswer" name="useranswer" value="C">C&nbsp;&nbsp;<input type="checkbox" id="useranswer" name="useranswer" value="D">D&nbsp;&nbsp;</div><div class="cbtn"><input type="hidden" name="pointnum" id="pointnum" value="122516"><input type="hidden" name="forumid" id="forumid" value="0"><input type="hidden" name="testid" id="testid" value="71682"><input type="hidden" name="questionid" id="questionid" value="12927111"><input type="hidden" name="pointtype" id="pointtype" value="1"><input type="hidden" name="newpointid" id="newpointid" value="122516"><input type="button" name="btn" value="提交答案" onclick="postPoint()"></div><div id="PointQuestionAnswer"><div>正确答案：AB。<font color="red">请选择正确答案，重新提交。</font></div><div>答案解析：股份支付所确认的费用取决于两个因素：一个是授予日的公允价值，另一个是权益工具的数量。</div></div></div>
+    </form>
+</div> -->
+
+<div id="videoPoint" style="" class="tanchu_zsd">
+    <form name="pointform" action="">
+    <div class="tit">
+        <span id="span_name">知识点测试</span> 
+    </div>
+    <div style="height: 370px; margin: 10px; overflow: auto" id="videoPointContent" class="nr"><div class="ctit">判断题：</div><div>企业自行建造或通过分包商建造房地产，应当根据房地产建造协议条款和实际情况，判断确认收入应适用的会计准则。（　　）<br>N、 错 <br>Y、 对</div><div><input type="radio" id="useranswer" name="useranswer" value="Y">对&nbsp;&nbsp;<input type="radio" id="useranswer" name="useranswer" value="N">错</div><div class="cbtn"><input type="hidden" name="pointnum" id="pointnum" value="122520"><input type="hidden" name="forumid" id="forumid" value="0"><input type="hidden" name="testid" id="testid" value="71685"><input type="hidden" name="questionid" id="questionid" value="12927114"><input type="hidden" name="pointtype" id="pointtype" value="1"><input type="hidden" name="newpointid" id="newpointid" value="122520"><input type="button" name="btn" value="提交答案" onclick="postPoint()"></div><div id="PointQuestionAnswer"><div>正确答案：对。<font color="red">请选择正确答案，重新提交。</font></div><div>答案解析：企业自行建造或通过分包商建造房地产，应当根据房地产建造协议条款和实际情况，判断确认收入应适用的会计准则。</div></div></div>
+    </form>
+</div>
+</body>
+<script>
+    function a(){
+        if ($("#videoPoint").css("display") == "none")
+        {
+            console.debug("not found test")
+            return 
+        }
+
+        if ($("#videoPointContent").length > 0){
+            var answer = $("#PointQuestionAnswer").text();
+            if (answer.length  == 0) {
+
+            $("[name=btn]").click();
+            return;
+            }
+            var ctit = $(".ctit").text();
+            if (ctit == "多选题："){
+                var ret = answer.match(/正确答案：([ABCD]*)。/)[1];
+                console.debug(ret);
+                $("[name=useranswer]").each(function () {
+                    if(ret.indexOf($(this).val())!=-1)
+                        $(this).prop( "checked", true )
+                });
+            } else if (ctit == "判断题："){
+                var ret = answer.match(/正确答案：(.)。/)[1];
+                console.debug(ret);
+                if (ret == "对"){
+                    $("[name=useranswer]").each(function () {
+                        if($(this).val() == "Y")
+                            $(this).prop( "checked", true )
+                    });
+                } else {
+                    $("[name=useranswer]").each(function () {
+                        if($(this).val() == "N")
+                            $(this).prop( "checked", true )
+                    });
+                }
+            } else {
+                var ret = answer.match(/正确答案：([ABCD])。/)[1];
+                $("[name=useranswer]").each(function () {
+                    if(ret.indexOf($(this).val())!=-1)
+                        $(this).prop( "checked", true )
+                });
+            }
+            // $("[name=btn]").click();
+        }
+    }
+</script>
+</html>
